@@ -16,8 +16,6 @@ services:
       - nginx_logs:/var/log/nginx
     networks:
       - solidev-network
-    depends_on:
-      - solidev-frontend
 
 volumes:
   nginx_logs:
