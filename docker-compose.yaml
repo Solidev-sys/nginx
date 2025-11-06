@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  nginx-proxy:
+    image: nginx:latest
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      - "443:443"
+    volumes:
+      # Archivos de configuración del host (solo lectura)
+      - /home/escritorio/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /home/escritorio/nginx/conf.d:/etc/nginx/conf.d:ro
+      - /home/escritorio/nginx/ssl:/etc/ssl/private:ro
+      # Logs de Nginx (opcional)
+      - nginx_logs:/var/log/nginx
+    networks:
+      - solidev-network
+    depends_on:
+      - solidev-frontend
+
+volumes:
+  nginx_logs:
+
+networks:
+  solidev-network:
